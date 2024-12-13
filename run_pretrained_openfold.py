@@ -294,6 +294,10 @@ def main(args):
             # Does nothing if the alignments have already been computed
             precompute_alignments(tags, seqs, alignment_dir, args)
 
+            if args.precompute_aligments_only:
+                logger.info("Skipping inference because --precompute_aligments_only was set")
+                continue
+
             feature_dict = feature_dicts.get(tag, None)
             if feature_dict is None:
                 feature_dict = generate_feature_dict(
@@ -397,6 +401,10 @@ if __name__ == "__main__":
         "--use_precomputed_alignments", type=str, default=None,
         help="""Path to alignment directory. If provided, alignment computation 
                 is skipped and database path arguments are ignored."""
+    )
+    parser.add_argument(
+        "--precompute_aligments_only", action="store_true", default=False,
+        help="""Stop after precomputing alignments, do not run inference."""
     )
     parser.add_argument(
         "--use_custom_template", action="store_true", default=False,
