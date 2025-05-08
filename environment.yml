@@ -28,6 +28,7 @@ dependencies:
   - aria2
   - mkl
   - git
+  - openblas
   - bioconda::hmmer
   - bioconda::hhsuite
   - bioconda::kalign2
